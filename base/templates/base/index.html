@@ -1,0 +1,20 @@
+{% extends 'base/base.html' %}
+{% block content %}
+
+<div class='card'>
+    <div class='card-header'>
+        <h1>Welcome back {{ request.user.username }}!</h1>
+    </div>
+    <div class='card-body'>
+        
+        {% if request.user.is_staff %}
+        <p>Your account type is: Administrator</p>
+        {% else %}
+        <p>Your account type is: Seller Account</p>
+        {% endif %}
+            
+        
+    </div>
+</div>
+
+{% endblock content %}

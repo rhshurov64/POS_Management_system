@@ -1,0 +1,157 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>POS Management System</title>
+
+  <link rel="stylesheet" href="{% static 'css/sidebar.css' %}">
+  <link rel="stylesheet" href="{% static 'css/category.css' %}">
+
+
+
+  <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+  
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-EVSTQN3/azprG1Anm3QDgpJLIm9Nao0Yz1ztcQTwFspd3yD65VohhpuuCOmLASjC" crossorigin="anonymous">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+
+  <script src="https://kit.fontawesome.com/e5fcab2af9.js" crossorigin="anonymous"></script>
+</head>
+
+<body>
+
+  <div class='dashboard'>
+    <div class="dashboard-nav">
+      <header><a href="#!" class="menu-toggle"><i class="fas fa-bars"></i></a><a href="#"
+          style="pointer-events: none; cursor: default;" class="brand-logo"><span>POS
+            System</span></a></header>
+      <nav class="dashboard-nav-list">
+        <a href="/" class="dashboard-nav-item"><i class="fas fa-home"></i>
+          Dashboard </a>
+          
+
+          
+
+        {% if not request.user.is_staff %}
+        <a href="{% url 'category' %}" class="dashboard-nav-item"><i class="bi bi-bookmark"></i> View Category </a>
+        {% endif %}
+
+        {% if request.user.is_staff %}
+        <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="bi bi-bookmark"></i> Category </a>
+          <div class='dashboard-nav-dropdown-menu'><a href="{% url 'manage_category' %}"
+              class="dashboard-nav-dropdown-item">Manage Category's</a>
+
+            <a href="{% url 'category' %}" class="dashboard-nav-dropdown-item">Add New Category</a>
+            
+          </div>
+        </div>
+
+        {% endif %}
+
+        {% if not request.user.is_staff %}
+        <a href="{% url 'product' %}" class="dashboard-nav-item"><i class="fa-solid fa-cart-shopping"></i> View Product </a>
+        {% endif %}
+
+        {% if request.user.is_staff %}
+        <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fa-solid fa-cart-shopping"></i> Product </a>
+          <div class='dashboard-nav-dropdown-menu'><a href="{% url 'manage_product' %}"
+              class="dashboard-nav-dropdown-item">Manage Product's</a>
+            <a href="{% url 'product' %}" class="dashboard-nav-dropdown-item">Add New Product</a>
+          </div>
+        </div>
+
+        {% endif %}
+
+        <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
+              class="bi bi-card-checklist"></i> Sales </a>
+          <div class='dashboard-nav-dropdown-menu'>
+            
+            <a href="#" class="dashboard-nav-dropdown-item">Manage Sales</a><a href="#"
+              class="dashboard-nav-dropdown-item">Create Sales</a>
+          </div>
+        </div>
+        {% if request.user.is_staff %}
+        <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
+              class="fas fa-users"></i> Manage Users </a>
+          <div class='dashboard-nav-dropdown-menu'><a href="#"
+              class="dashboard-nav-dropdown-item">Administrator's</a>
+            <a href="#" class="dashboard-nav-dropdown-item">Seller's</a>
+            <a href="#" class="dashboard-nav-dropdown-item">Add New User</a>
+          </div>
+        </div>
+        {% endif %}
+
+        <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i
+              class="fas fa-money-check-alt"></i> Customer's </a>
+          <div class='dashboard-nav-dropdown-menu'>
+            
+            <a href="#" class="dashboard-nav-dropdown-item">Manage Customer</a>
+
+            <a href="#" class="dashboard-nav-dropdown-item">Add New Customer</a>
+
+          </div>
+        </div>
+
+        {% if request.user.is_staff %}
+        <div class='dashboard-nav-dropdown'><a href="#!" class="dashboard-nav-item dashboard-nav-dropdown-toggle"><i class="fa-solid fa-file"></i> Reports </a>
+          <div class='dashboard-nav-dropdown-menu'>
+            
+            <a href="#" class="dashboard-nav-dropdown-item">Customer Report</a>
+            
+            <a href="#" class="dashboard-nav-dropdown-item">Seller Report</a>
+
+            <a href="#" class="dashboard-nav-dropdown-item">Product Report</a>
+
+          </div>
+        </div>
+        {% endif %}
+
+
+
+
+        <a href="#" class="dashboard-nav-item"><i class="fas fa-user"></i> Profile </a>
+        <div class="nav-item-divider"></div>
+        <a href="{% url 'user_logout' %}" class="dashboard-nav-item"><i class="fas fa-sign-out-alt"></i> Logout </a>
+      </nav>
+    </div>
+    <div class='dashboard-app'>
+      <header class='dashboard-toolbar'><a href="#" class="menu-toggle"><i class="fa-solid fa-bars"></i></a></header>
+      <div class='dashboard-content'>
+        <div class='container'>
+
+          {% block content %}
+
+          {% endblock content %}
+
+          <!-- <div class='card'>
+            <div class='card-header'>
+              <h1>Welcome back Jim</h1>
+            </div>
+            <div class='card-body'>
+              <p>Your account type is: Administrator</p>
+            </div>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+  <script src="{% static 'js/sidebar.js' %}"></script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM"
+    crossorigin="anonymous"></script>
+  <script src="https://kit.fontawesome.com/f6dcf461c1.js" crossorigin="anonymous"></script>
+</body>
+
+</html>

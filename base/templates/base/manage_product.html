@@ -1,0 +1,54 @@
+{% extends 'base/base.html' %}
+
+{% block content %}
+
+
+<div class="row">
+    <div class="col">
+    </div>
+    <div class="col-6 mb-4">
+        <form class="form-inline my-lg-0">
+            <input style="display: inline; width: 80%;" class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <button style="margin-top: -5px;" class="btn btn-outline-success" type="submit">Search</button>
+        </form>
+    </div>
+</div>
+
+<div class='card'>
+    <div class='card-header'>
+        <h5 style="text-align: left !important;">ALL Product's</h5>
+    </div>
+    <div class='card-body'>
+        <table class="table table-hover">
+            <thead>
+              <tr>
+                <th scope="col">Name</th>
+                <th scope="col">Image</th>
+                <th scope="col">Size</th>
+                <th scope="col">Price</th>
+                <th scope="col">Quantity</th>
+                <th scope="col">Description</th>
+                <th scope="col">Action</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td>Mark</td>
+                <td>Mark</td>
+                <td>Otto</td>
+                <td>Otto</td>
+                <td>Otto</td>
+                <td>Otto</td>
+                <td>
+                    <a href=""><i class="bi bi-eye-fill"></i></a>
+                    <a href=""><i class="bi bi-pencil-square"></i></a>
+                    <a href=""><i class="bi bi-trash"></i></a>
+                </td>
+              </tr>
+              
+            </tbody>
+        </table>
+    </div>
+</div>
+
+{% endblock content %}

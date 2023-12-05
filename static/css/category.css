@@ -1,0 +1,59 @@
+/*service*/
+
+*{
+    margin: 0px;
+    padding: 0px;
+}
+.services a {
+    text-decoration: none;
+  }
+  .services .service-box {
+    text-align: center;
+  }
+  .services .service-box h2 {
+    color: #222;
+    font-size: 20px;
+    padding-top: 10px;
+    text-decoration: none;
+  }
+  .services a .service-box:hover h2 {
+    color: #FB0626;
+  }
+  .services .investor-box {
+      background-color: #FFFFFF;
+      background-position: center center;
+      padding: 20px;
+      width: 100%;
+      height: 300px;
+      display: block;
+      position: relative;
+      box-shadow: 0 1px 5px 0 rgba(0, 0, 0, 0.2);
+  }
+  .services .investor-box h2 {
+    font-size: 20px;
+  }
+  .services .investor-box .flip-view {
+    position: absolute;
+    top: 0;
+    width: 100%;
+    background-color: #5C5F7A;
+    left: -10%;
+    padding: 20px;
+    height: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    visibility: hidden;
+    opacity: 0;
+    transition: all ease-in-out 333ms;
+  }
+  .services .investor-box a {
+    color: #fff;
+    font-size: 20px;
+    font-weight: 600;
+  }
+  .services .investor-box:hover .flip-view {
+      left: 0;
+      visibility: visible;
+      opacity: 1;
+  }
