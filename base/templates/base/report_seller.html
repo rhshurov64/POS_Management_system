@@ -1,0 +1,68 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+
+<div class='card'>
+    <div class='card-header py-3'>
+        <div class="row">
+            <div class="col-4">
+                    Select Seller:
+                    <select class="selectpicker" data-show-subtext="false" data-live-search="true">
+                        <option value="">Select</option>
+                        <option value='Anaesthesia'>Anaesthesia</option>
+                        <option value='Anatomy and Physiology'>Anatomy and Physiology</option>
+                        <option value='Cardiology'>Cardiology</option>
+                        <option value='Clinical Skills'>Clinical Skills</option>
+                        <option value='Critical Care'>Critical Care</option>
+                        <option value='Dermatology'>Dermatology</option>
+                        <option value='Ear, Nose and Throat'>Ear, Nose and Throat</option>
+                    </select>
+            </div>
+           
+
+            <div class="col-2">
+                
+                <input class="btn btn-secondary px-4" type="submit" value="Search">
+            </div>
+            
+        </div>
+    </div>
+    <div class='card-body'>
+
+    <table class="table table-bordered">
+        <thead>
+            <th>Date</th>
+            <th>Total Item Sell</th>
+            <th>Product's List</th>
+            <th>Customer's List</th>
+            <th>Total Amount</th>
+        </thead>
+        <tbody>
+            <tr>
+                <td>Thomas Hardy</td>
+                <td>Thomas Hardy</td>
+                <td>thomashardy@mail.com</td>
+                <td>thomashardy@mail.com</td>
+                <td>thomashardy@mail.com</td>
+            </tr>
+           
+        </tbody>
+        
+    </table>
+
+    </div>
+    
+</div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+
+{% endblock content %}

@@ -7,7 +7,7 @@
     </div>
     <div class="col-6 mb-4">
         <form class="form-inline my-lg-0">
-            <input style="display: inline; width: 80%;" class="form-control" type="search" placeholder="Search" aria-label="Search">
+            <input style="display: inline; width: 80%;" class="form-control" name="search" type="search" placeholder="Search" aria-label="Search">
             <button style="margin-top: -5px;" class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
@@ -18,27 +18,56 @@
         <h5 style="text-align: left !important;">ALL Category's</h5>
     </div>
     <div class='card-body'>
-        <table class="table table-hover">
+        <table class="table table-bordered">
             <thead>
               <tr>
+                <th scope="col">Code</th>
                 <th scope="col">Name</th>
                 <th scope="col">Image</th>
                 <th scope="col">Description</th>
+                <th scope="col">Products</th>
                 <th scope="col">Action</th>
               </tr>
             </thead>
             <tbody>
+              
+              {% for category in categories %}
+                
+              
+                
               <tr>
-                <td>Mark</td>
-                <td>Mark</td>
-                <td>Otto</td>
+                <td>{{category.code}}</td>
+                <td>{{category.name}}</td>
                 <td>
-                    <a href=""><i class="bi bi-eye-fill"></i></a>
-                    <a href=""><i class="bi bi-pencil-square"></i></a>
-                    <a href=""><i class="bi bi-trash"></i></a>
+                {% if category.image %}
+                  <img style="height: 80px; width: 100%;" src="{{ category.image.url }}" alt="image">
+                {% else %}
+
+                {% endif %}
+                </td>
+                
+                
+                
+                {% if category.description %}
+                <td>{{category.description|truncatewords:30}}</td>
+                {% else %}
+                <td></td>
+                {% endif %}
+
+                <td>
+                  <!-- area.place_set.all() -->
+                {% for product in category.categories.all %}
+                {{product.name}},
+                {% endfor %}
+                </td>
+                
+                  
+                <td>
+                    <a href="{% url 'edit_category' category.id %}"><i class="bi bi-pencil-square material-icons d-inline"></i></a>
+                    <a onclick="return confirm('Are you sure you want to delete this item?');" href="{% url 'delete_category' category.id %}"><i class="bi bi-trash material-icons d-inline"></i></a>
                 </td>
               </tr>
-              
+              {% endfor %}
             </tbody>
         </table>
         

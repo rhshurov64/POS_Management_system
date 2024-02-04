@@ -1,0 +1,106 @@
+{% extends 'base/base.html' %}
+
+
+{% block content %}
+
+<link href="//netdna.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css" rel="stylesheet">
+<link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/css/bootstrap-select.min.css" />
+
+<div class='card'>
+    <form method="post" action="/create_sales/">{% csrf_token %}
+    <div class='card-header py-3'>
+        <div class="row">
+            
+            <div class="col">
+                    Select Product:
+                    <select name="product_name" class="selectpicker" data-show-subtext="false" data-live-search="true">
+                        <option value=''>Select</option>
+                        
+                        {% for product in products %}
+                        <option value='{{product.name}}'>{{product.name}} - {{product.size}}</option>
+                        {% endfor %}
+                            
+                        
+                        
+                    </select>
+            </div>
+
+            <div class="col">
+                Quantity:
+                <input style="padding: 5px; width: 100px; margin-right: 15px;" type="text" name="quantity" id="" >
+                <input class="btn btn-secondary px-4" type="submit" value="Add Product">
+            </div>
+            
+            
+        </div>
+    </div>
+    </form>
+    <div class='card-body'>
+    <h5 style="background-color: #5C5F7A; color: white; padding: 20px;">Added Items</h5>
+
+    <table class="table table-bordered">
+        <thead>
+            <th scope="col" class="w-auto" >Product Name</th>
+            <th scope="col" class="w-auto"  >Price</th>
+            <th scope="col" class="w-auto"  >Size</th>
+            <th scope="col" class="w-auto"  >Quantity</th>
+            <th scope="col" class="w-auto"  >Total</th>
+            <th scope="col" class="w-auto"  >Actions</th>
+        </thead>
+        <tbody>
+            
+            {% for item in seller_products %}
+                    <tr>
+                        <td>{{item.products.name}}</td>
+                        <td>{{item.products.price}}</td>
+                        <td>{{item.products.size}}</td>
+                        <td>{{item.quantity}}</td>
+                        <td>{{ item.total }}</td>
+                        
+                        <td>
+                            <a href="{% url 'bucket_delete' item.id %}" class="delete" data-toggle="modal"><i class="bi bi-trash material-icons"></i></a>
+                        </td>
+                    </tr>
+               
+            {% endfor %}
+            <tr>
+                <td>Total</td>
+                <td class="text-center" colspan="5">{{seller_bucket_total}}</td>
+            </tr>
+        </tbody>
+        
+    </table>
+    <form action="/make_order/" method="POST">{% csrf_token %}
+    <div class="row">
+        <div class="col">
+            Select Customer:
+            <select name="customer" class="selectpicker" data-show-subtext="false" data-live-search="true">
+                <option value="">Select</option>
+                
+                {% for customer in customers %}
+                <option value='{{customer.id}}'>{{customer.name}}</option>
+                {% endfor %}
+                    
+                
+            </select>
+        </div>
+        <div class="col me-3 d-flex justify-content-end">
+            <input class="btn btn-secondary px-4" type="submit" value="Make Order">
+        </div>
+
+    </div>
+    </form>
+        
+
+    </div>
+    
+</div>
+
+
+
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.2/jquery.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.6.3/js/bootstrap-select.min.js"></script>
+
+{% endblock content %}

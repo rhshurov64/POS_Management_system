@@ -8,18 +8,80 @@
         
         {% if request.user.is_staff %}
         <button type="button" class="btn btn-sm btn-outline-success py-1 mb-4 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add New Product</button>
-        {% include 'base/product_add.html' %}
         {% endif %}
     </div>
+    
     <div class="col-6 mb-4">
-        <form class="form-inline my-lg-0">
-            <input style="display: inline; width: 80%;" class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <form method="GET" class="form-inline my-lg-0">
+            <input style="display: inline; width: 80%;" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
             <button style="margin-top: -5px;" class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
 </div>
 
+  <!-- Modal -->
+  <form method="POST" action="" id="product-add" enctype="multipart/form-data">{% csrf_token %}
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-scrollable">
+        <div style="background-color: #DFDFDF;" class="modal-content">
+        <div class="modal-header">
+            <h5 class="modal-title" id="exampleModalLabel">Add New Product</h5>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+            
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Product Name</label>
+                    <input name="name" type="text" class="form-control" id="exampleFormControlInput1" placeholder="XYZ">
+                </div>
 
+                <div class="mb-3">
+                    <select name="category" class="form-select" aria-label="Default select example">
+                        <option selected>Select Category</option>
+                        
+                        {% for c in category %}
+                        <option value='{{c.name}}'>{{c.name}}</option>
+                        {% endfor %}
+                        
+                    </select>
+                </div>
+
+                <div class="mb-3">
+                    <label for="formFile" class="form-label">Product Image</label>
+                    <input name="image" class="form-control" type="file" id="formFile">
+                </div>
+                <div class="mb-3">
+                    <select name="size" class="form-select" aria-label="Default select example">
+                        <option selected>Select Size</option>
+                        <option value="10">10</option>
+                        <option value="20">20</option>
+                        <option value="30">20</option>
+                    </select>
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Price</label>
+                    <input name="price" type="text" class="form-control" id="exampleFormControlInput1" placeholder="100">
+                </div>
+                <div class="mb-3">
+                    <label for="exampleFormControlInput1" class="form-label">Quantity</label>
+                    <input name="quantity" type="text" class="form-control" id="exampleFormControlInput1" placeholder="100">
+                </div>
+
+
+                <div class="mb-3">
+                    <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                    <textarea name="description" class="form-control" id="exampleFormControlTextarea1" rows="3"></textarea>
+                </div>
+            
+        </div>
+        <div class="modal-footer">
+            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+            <button type="submit" class="btn btn-primary">Save</button>
+        </div>
+        </div>
+    </div>
+    </div>
+</form>
 
 <div class='card'>
 </div>
@@ -32,52 +94,29 @@
             <div class="container">
                 <div class="pt-5">
                     <div class="row">
-                        <div class="col-md-3">
-                           
-                            <div class="investor-box">
-                                <p>Category: T-shirt</p>
-                                <img style="height: 130px; width: 80%;" src="https://cdn.pixabay.com/photo/2016/11/23/06/57/isolated-t-shirt-1852114_1280.png" alt="">
-                                <h6 class="mt-2">Code: 101</h6>
-                                <span>Price: 500 BDT</span>
-                                <div class="flip-view">
-                                    <a style="font-size: 15px;" href="#">View Details <i class="fas fa-chevron-circle-right"></i></a>
-                                </div>
-                                <a href="#">edit</a>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="investor-box">
-                                <p>Category: T-shirt</p>
-                                <img style="height: 130px; width: 80%;" src="https://cdn.pixabay.com/photo/2016/11/23/06/57/isolated-t-shirt-1852114_1280.png" alt="">
-                                <h6 class="mt-2">Code: 101</h6>
-                                <span>Price: 500 BDT</span>
+                        
+                        {% for product in products %}
+                            
+                        <div class="col-md-3 text-center no-gutters mb-4">
+                            <div class="investor-box no-gutters">
+                                <p>Category: {% for category in product.categories.all %}{{ category.name }}, {% endfor %}</p>
+                                
+                                {% if product.image %}
+                                <img style="height: 130px; width: 80%;" src="{{product.image.url}}" alt="">
+                                    
+                                {% endif %}
+                                    
+                                <h6 class="mt-0">Name: {{product.name}}</h6>
+                                <p>Price: {{product.price}}</p>
+                                <p style="margin-top: -10px;">Size: {{product.size}}</p>
                                 <div class="flip-view">
                                     <a style="font-size: 15px;" href="#">View Details <i class="fas fa-chevron-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="investor-box">
-                                <p>Category: T-shirt</p>
-                                <img style="height: 130px; width: 80%;" src="https://cdn.pixabay.com/photo/2016/11/23/06/57/isolated-t-shirt-1852114_1280.png" alt="">
-                                <h6 class="mt-2">Code: 101</h6>
-                                <span>Price: 500 BDT</span>
-                                <div class="flip-view">
-                                    <a style="font-size: 15px;" href="#">View Details <i class="fas fa-chevron-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="investor-box">
-                                <p>Category: T-shirt</p>
-                                <img style="height: 130px; width: 80%;" src="https://cdn.pixabay.com/photo/2016/11/23/06/57/isolated-t-shirt-1852114_1280.png" alt="">
-                                <h6 class="mt-2">Code: 101</h6>
-                                <span>Price: 500 BDT</span>
-                                <div class="flip-view">
-                                    <a style="font-size: 15px;" href="#">View Details <i class="fas fa-chevron-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
+                        {% endfor %}
+
+
                     </div>
                 </div>
             </div>

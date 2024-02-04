@@ -6,12 +6,47 @@
         
         {% if request.user.is_staff %}
         <button type="button" class="btn btn-sm btn-outline-success py-1 mb-4 d-inline" data-bs-toggle="modal" data-bs-target="#exampleModal">+ Add New Category</button>
-        {% include 'base/category_add.html' %}
+        <form method="POST" action="" id="category-add" enctype="multipart/form-data">
+            <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-scrollable">
+                <div style="background-color: #DFDFDF;" class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add New Category</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput1" class="form-label">Category Name</label>
+                        <input type="text" class="form-control" id="exampleFormControlInput1" name="name" placeholder="T-shirt">
+                    </div>
+                    <div class="mb-3">
+                        <label for="formFile" class="form-label">Category Code</label>
+                        <input class="form-control" type="text" id="formFile" name="code">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlInput3" class="form-label">Upload Image</label><br>
+                        <input name="image" type="file" class="form-control" id="inputGroupFile01">
+                    </div>
+                    <div class="mb-3">
+                        <label for="exampleFormControlTextarea1" class="form-label">Description</label>
+                        <textarea class="form-control" id="exampleFormControlTextarea1" name="description" rows="3"></textarea>
+                    </div>
+                    
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Save</button>
+                </div>
+                </div>
+            </div>
+            </div>
+        </form>
         {% endif %}
     </div>
     <div class="col-6 mb-4">
-        <form class="form-inline my-lg-0">
-            <input style="display: inline; width: 80%;" class="form-control" type="search" placeholder="Search" aria-label="Search">
+        <form class="form-inline my-lg-0" method="GET">
+            <input style="display: inline; width: 80%;" name="search" class="form-control" type="search" placeholder="Search" aria-label="Search">
             <button style="margin-top: -5px;" class="btn btn-outline-success" type="submit">Search</button>
         </form>
     </div>
@@ -30,42 +65,25 @@
             <div class="container">
                 <div class="pt-5">
                     <div class="row">
-                        <div class="col-md-3">
+                        
+                        {% for category in categories %}
+                            
+                        
+                            
+                        <div class="col-md-3 mb-4">
                             <div class="investor-box">
-                                <img style="height: 200px; width: 100%;" src="https://cdn.pixabay.com/photo/2016/11/23/06/57/isolated-t-shirt-1852114_1280.png" alt="">
-                                <p class="mt-2">T-shirt</p>
+                                {% if category.image %}
+                                    <img style="height: 200px; width: 100%;" src="{{ category.image.url }}" alt="image">
+                                {% endif %}
+                                <p class="mt-2 d-inline">{{category.name}}:</p> <span>{{category.code}}</span>
                                 <div class="flip-view">
-                                    <a style="font-size: 15px !important;" href="#">View All Product <i class="fas fa-chevron-circle-right"></i></a>
+                                    <a style="font-size: 15px !important;" href="#">View Category <i class="fas fa-chevron-circle-right"></i></a>
                                 </div>
                             </div>
                         </div>
-                        <div class="col-md-3">
-                            <div class="investor-box">
-                                <img style="height: 200px; width: 100%;" src="https://media.istockphoto.com/id/1406303920/photo/womens-sweatpants-sport.jpg?s=2048x2048&w=is&k=20&c=5lcoNeGg7Fzp6Pw4Fg1oWuJVMso6OE0yhEwpnVsadzs=" alt="">
-                                <p class="mt-2">Trouser</p>
-                                <div class="flip-view">
-                                    <a style="font-size: 15px !important;" href="#">View All Product <i class="fas fa-chevron-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="investor-box">
-                                <img style="height: 200px; width: 100%;" src="https://cdn.pixabay.com/photo/2015/01/06/17/27/clothes-590567_640.jpg" alt="">
-                                <p class="mt-2">Shirt</p>
-                                <div class="flip-view">
-                                    <a style="font-size: 15px !important;" href="#">View All Product <i class="fas fa-chevron-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="col-md-3">
-                            <div class="investor-box">
-                                <img style="height: 200px; width: 100%;" src="https://cdn.pixabay.com/photo/2016/06/03/17/35/shoes-1433925_1280.jpg" alt="">
-                                <p class="mt-2">Shoes</p>
-                                <div class="flip-view">
-                                    <a style="font-size: 15px !important;" href="#">View All Product <i class="fas fa-chevron-circle-right"></i></a>
-                                </div>
-                            </div>
-                        </div>
+
+                        {% endfor %}
+                       
                     </div>
                 </div>
             </div>
@@ -75,6 +93,29 @@
 
     </div>
 </div>
+
+<script>
+    $(document).ready(function(){
+        $('#category-add').on("submit", function(e){
+            e.preventDefault();
+            console.log('Submitted');
+
+            // Use FormData to handle the entire form data, including files
+            let formData = new FormData(this);
+
+            $.ajax({
+                url: "{% url 'category' %}",
+                method: "POST",
+                data: formData,
+                processData: false,  // Important for FormData
+                contentType: false,  // Important for FormData
+                success: function(response){
+                    console.log(response);
+                }
+            });
+        });
+    });
+</script>
 
 
 {% endblock content %}
