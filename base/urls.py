@@ -20,7 +20,7 @@ urlpatterns = [
     path('delete_seller/<int:id>/', views.delete_seller, name='delete_seller'),
     path('customer/', views.customer, name='customer'),
     path('delete_customer/<int:id>/', views.delete_customer, name='delete_customer'),
-    path('sales/', views.sales, name='sales'),
+    path('sales/', views.all_order_details, name='sales'),
     path('create_sales/', views.create_sales, name='create_sales'),
     path('bucket_delete/<int:b_id>/', views.bucket_delete, name='bucket_delete'),
     path('report_customer/', views.report_customer, name='report_customer'),
@@ -28,6 +28,7 @@ urlpatterns = [
     path('report_product/', views.report_product, name='report_product'),
     
     path('make_order/', views.make_order, name='make_order'),
+    path('order/', views.order, name='order'),
     
     
     

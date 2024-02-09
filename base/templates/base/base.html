@@ -73,8 +73,10 @@
               class="bi bi-card-checklist"></i> Sales </a>
           <div class='dashboard-nav-dropdown-menu'>
             
-            <a href="{% url 'sales' %}" class="dashboard-nav-dropdown-item">Manage Order's</a><a href="{% url 'create_sales' %}"
+            <a href="{% url 'create_sales' %}"
               class="dashboard-nav-dropdown-item">Create Order</a>
+              <a href="{% url 'sales' %}" class="dashboard-nav-dropdown-item">Manage Order's</a>
+              <a href="{% url 'order' %}" class="dashboard-nav-dropdown-item">All Order's</a>
           </div>
         </div>
         {% if request.user.is_staff %}

@@ -54,3 +54,6 @@ class Admin_ModelAdmin(admin.ModelAdmin):
     def get_products(self, obj):
         return [item.product.name for item in obj.items.all()]
    
+@admin.register(Payment)
+class Admin_ModelAdmin(admin.ModelAdmin):
+    list_display = ['id', 'time', 'order', 'total_amount', 'paid_amount', 'due_amount', 'status']

@@ -25,34 +25,37 @@
         <table class="table table-bordered">
             <thead>
                 <th>Date</th>
-                <th>Customer Name</th>
-                <th>Customer Phone</th>
+                <th>Order ID</th>
                 <th>Seller Name</th>
-                <th>Seller Phone</th>
-                <th>Category</th>
-                <th>Product</th>
-                <th>Price</th>
-                <th>Quantity</th>
-                <th>Total</th>
+                <th>Customer Name</th>
+                <th>Total Amount</th>
+                <th>Paid Amount</th>
+                <th>Due Amount</th>
+                <th>Status</th>
                 <th>Actions</th>
             </thead>
             <tbody>
+                
+                {% for order_detail in order_details %}
                 <tr>
-                    <td>Thomas Hardy</td>
-                    <td>Thomas Hardy</td>
-                    <td>Thomas Hardy</td>
-                    <td>Thomas Hardy</td>
-                    <td>thomashardy@mail.com</td>
-                    <td>89 Chiaroscuro Rd, Portland, USA</td>
-                    <td>(171) 555-2222</td>
-                    <td>(171) 555-2222</td>
-                    <td>(171) 555-2222</td>
-                    <td>(171) 555-2222</td>
+                    <td>{{order_detail.time}}</td>
+                    <td>{{order_detail.order}}</td>
+                    <td>{{order_detail.order.seller}}</td>
+                    <td>{{order_detail.order.customer}}</td>
+                    <td>{{order_detail.total_amount}}</td>
+                    <td>{{order_detail.paid_amount}}</td>
+                    <td>{{order_detail.due_amount}}</td>
+                    <td>{{order_detail.status}}</td>
+                  
+
                     <td>
-                        <a href="#editEmployeeModal" class="edit" data-toggle="modal"><i class="bi bi-pencil-square material-icons"></i></a>
-                        <a href="#deleteEmployeeModal" class="delete" data-toggle="modal"><i class="bi bi-trash material-icons"></i></a>
+                        {% if order_detail.status %}
+                            <a href=""><button class="btn btn-outline-success btn-sm px-4">Pay</button></a>
+                        {% endif %}
+                            
                     </td>
                 </tr>
+                {% endfor %}
                
             </tbody>
         </table>

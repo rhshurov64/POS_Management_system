@@ -116,7 +116,7 @@ class OrderItems(models.Model):
     
 class Order(models.Model):
     seller = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders_as_seller')
-    customer = models.ForeignKey(User, on_delete=models.CASCADE, related_name='orders_as_customer', null = True, blank = True)
+    customer = models.ForeignKey(Customer, on_delete=models.CASCADE, related_name='orders_as_customer', null = True, blank = True)
     items = models.ManyToManyField(OrderItems, null=True, blank=True)
     
     def total_amount(self):
@@ -125,3 +125,33 @@ class Order(models.Model):
             total = total + item.calculate_item_total()
         return total
     
+    def __str__(self):
+        return str(self.id)
+
+class Payment(models.Model):
+    time = models.DateTimeField(auto_now_add=True)
+    order = models.ForeignKey(Order, on_delete=models.CASCADE)
+    paid_amount = models.IntegerField(null=True, blank=True)
+    
+    
+    def total_amount(self):
+        return self.order.total_amount()
+    
+    def due_amount(self):
+        total_amount = self.order.total_amount()
+        due = total_amount - self.paid_amount
+        return due
+    
+    def status(self):
+        total_amount = self.order.total_amount()
+        if self.paid_amount == total_amount:
+            status_value = "Completed"
+        else:
+            status_value = "Pending"
+        return status_value
+        
+    def items(self):
+        return self.order.items
+        
+    def __str__(self):
+        return str(self.order)

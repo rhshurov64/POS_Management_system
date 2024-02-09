@@ -335,7 +335,6 @@ def make_order(request):
     return redirect('sales')
 
 
-
 @login_required(login_url='user_login')
 def report_customer(request):
     return render(request, 'base/report_customer.html')
@@ -349,4 +348,57 @@ def report_seller(request):
     return render(request, 'base/report_seller.html')
 
 
+def make_order(request):
+    if request.method == 'POST':
+        customer_id = request.POST['customer']
+        customer_obj = Customer.objects.get(id= customer_id)
+        
+        user = request.user
+        seller_bucket = ItemBucket.objects.filter(seller=user)
+        
+        items = []
+        for i in seller_bucket:
+            item = OrderItems.objects.create(
+                product = i.products,
+                quantity = i.quantity
+            )
+            items.append(item)
+        order = Order.objects.create(seller= user, customer = customer_obj)
+        for item in items:
+            order.items.add(item)
+            
+        seller_bucket.delete()
+    return redirect('order')
+
+
+def all_order_details(request):
+    if request.user.is_staff:
+        order_details = Payment.objects.all()
+    else:
+        order_details = Payment.objects.filter(seller = request.user)
+
+    context ={
+        'order_details': order_details
+    }
+    return render(request, 'base/sales.html', context)
+
+
+def order(request):
+    if request.user.is_staff:
+        order_details = Order.objects.all()
+    else:
+        order_details = Order.objects.filter(seller = request.user)
+
+    context ={
+        'order_details': order_details
+    }
+    return render(request, 'base/payments.html', context)
+
     
+
+def make_payment(request, o_id):
+    pass
+
+
+def payment_details(request):
+    pass
