@@ -26,6 +26,23 @@ This system is a comprehensive Point of Sale (POS) platform designed for efficie
 9.	Report Generate:
     •	Generate reports for sales, inventory, and other relevant analytics.
 
-
+![alt text](media/design_ss/dash1.png)
+![alt text](media/design_ss/dash2.png)
+![alt text](media/design_ss/admin1.png)
+![alt text](media/design_ss/admin-2.png)
+![alt text](media/design_ss/seller1.png)
+![alt text](media/design_ss/seller2.png)
+![alt text](media/design_ss/cus1.png)
+![alt text](media/design_ss/cus2.png)
+![alt text](media/design_ss/cat1.png)
+![alt text](media/design_ss/cat2.png)
+![alt text](media/design_ss/cat3.png)
+![alt text](media/design_ss/p-1.png)
+![alt text](media/design_ss/p-2.png)
+![alt text](media/design_ss/p-3.png)
+![alt text](media/design_ss/order.png)
+![alt text](media/design_ss/order2.png)
+![alt text](<media/design_ss/all order.png>)
+![alt text](<media/design_ss/payment update.png>)
 
 
