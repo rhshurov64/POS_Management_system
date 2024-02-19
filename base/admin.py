@@ -48,12 +48,9 @@ class Admin_ModelAdmin(admin.ModelAdmin):
    
 @admin.register(Order)
 class Admin_ModelAdmin(admin.ModelAdmin):
-    list_display =['id', 'seller','get_products', 'total_amount']
+    list_display =['id','time', 'seller','get_products', 'total_amount', 'due_amount', 'pay_amount', 'due_amount', 'status']
     
     @admin.display(description='products')
     def get_products(self, obj):
         return [item.product.name for item in obj.items.all()]
    
-@admin.register(Payment)
-class Admin_ModelAdmin(admin.ModelAdmin):
-    list_display = ['id', 'time', 'order', 'total_amount', 'paid_amount', 'due_amount', 'status']

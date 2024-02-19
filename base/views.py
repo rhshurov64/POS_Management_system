@@ -7,6 +7,12 @@ from .models import *
 from django.http import JsonResponse
 from .forms import *
 from decimal import Decimal
+import datetime
+from django.utils import timezone
+from django.db.models import Sum
+
+
+
 
 @login_required(login_url='user_login')
 def index(request):
@@ -14,12 +20,28 @@ def index(request):
     total_customer = Customer.objects.all().count()
     total_category = Category.objects.all().count()
     total_product = Product.objects.all().count()
+    total_sell_amount = sum(order.total_amount for order in Order.objects.all())
+    total_order = Order.objects.all().count()
     
+    now = timezone.now()
+    time = datetime.timedelta(days=30)
+    one = now-time
+    
+    last_month_total_sell_amount = sum(order.total_amount for order in Order.objects.filter(time__gte=one))
+    last_month_total_order = Order.objects.filter(time__gte=one).count()
+    
+ 
+
     context={
         'total_seller': total_seller,
         'total_customer': total_customer,
         'total_category': total_category,
-        'total_product': total_product
+        'total_product': total_product,
+        'total_sell_amount': total_sell_amount,
+        'last_month_total_sell_amount':last_month_total_sell_amount,
+        'total_order': total_order,
+        'last_month_total_order': last_month_total_order,
+        
         
     }
     return render(request, 'base/index.html', context)
@@ -266,9 +288,9 @@ def delete_admin(request, id):
 
 
 
-@login_required(login_url='user_login')
-def sales(request):
-    return render(request, 'base/sales.html')
+# @login_required(login_url='user_login')
+# def sales(request):
+#     return render(request, 'base/sales.html')
 
 @login_required(login_url='user_login')
 def create_sales(request):
@@ -353,6 +375,8 @@ def make_order(request):
         customer_id = request.POST['customer']
         customer_obj = Customer.objects.get(id= customer_id)
         
+        pay_amount = request.POST['pay_amount']
+        
         user = request.user
         seller_bucket = ItemBucket.objects.filter(seller=user)
         
@@ -363,24 +387,12 @@ def make_order(request):
                 quantity = i.quantity
             )
             items.append(item)
-        order = Order.objects.create(seller= user, customer = customer_obj)
+        order = Order.objects.create(seller= user, customer = customer_obj, pay_amount=pay_amount)
         for item in items:
             order.items.add(item)
             
         seller_bucket.delete()
-    return redirect('order')
-
-
-def all_order_details(request):
-    if request.user.is_staff:
-        order_details = Payment.objects.all()
-    else:
-        order_details = Payment.objects.filter(seller = request.user)
-
-    context ={
-        'order_details': order_details
-    }
-    return render(request, 'base/sales.html', context)
+    return redirect('/')
 
 
 def order(request):
@@ -394,10 +406,32 @@ def order(request):
     }
     return render(request, 'base/payments.html', context)
 
-    
+   
+
+   
+
 
 def make_payment(request, o_id):
-    pass
+    order_obj = Order.objects.get(id=o_id)
+    
+    if request.method == 'POST':
+        new_payment_amount_str = request.POST['new_payment_amount']
+
+        try:
+            new_payment_amount = int(new_payment_amount_str)
+        except ValueError:
+            # Handle the case where the input is not a valid integer
+            # You might want to display an error message or take appropriate action
+            pass
+        else:
+            order_obj.pay_amount += new_payment_amount
+            order_obj.save()
+    # order_obj.
+    context ={
+        'order_detail': order_obj
+    }
+    return render(request, 'base/sales.html', context)
+    
 
 
 def payment_details(request):

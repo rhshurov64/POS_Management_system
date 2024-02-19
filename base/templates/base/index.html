@@ -213,7 +213,7 @@
                     <span
                       class="h6 font-semibold text-muted text-sm d-block mb-2">Total
                       Sold Amount</span>
-                    <span class="h3 font-bold mb-0">750.90 BDT</span>
+                    <span class="h3 font-bold mb-0">{{total_sell_amount}} BDT</span>
                   </div>
                   <div class="col-auto">
                     <!-- <div
@@ -235,7 +235,7 @@
                   <div class="col-auto">
                     <div
                       class="icon icon-shape text-white text-lg rounded-circle">
-                      <a href><i class="fa fa-arrow-circle-right"></i></a>
+                      <a href = "/order/"><i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                 </div>
@@ -246,6 +246,10 @@
 
 
 
+          
+
+
+
           <!-- single box start-->
           <div class="col-xl-3 col-sm-6 col-12">
             <div class="card shadow border-0 hover-card">
@@ -253,9 +257,9 @@
                 <div class="row">
                   <div class="col">
                     <span
-                      class="h6 font-semibold text-muted text-sm d-block mb-2">Total
-                      Profit</span>
-                    <span class="h3 font-bold mb-0">500.00 BDT</span>
+                      class="h6 font-semibold text-muted text-sm d-block mb-2">Last Month
+                      Sold</span>
+                    <span class="h3 font-bold mb-0">{{last_month_total_sell_amount}} BDT</span>
                   </div>
                   <div class="col-auto">
                     <!-- <div
@@ -277,7 +281,47 @@
                   <div class="col-auto">
                     <div
                       class="icon icon-shape text-white text-lg rounded-circle">
-                      <a href><i class="fa fa-arrow-circle-right"></i></a>
+                      <a href=" /order/"><i class="fa fa-arrow-circle-right"></i></a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- single box end-->
+
+          <!-- single box start-->
+          <div class="col-xl-3 col-sm-6 col-12">
+            <div class="card shadow border-0 hover-card">
+              <div class="card-body">
+                <div class="row">
+                  <div class="col">
+                    <span
+                      class="h6 font-semibold text-muted text-sm d-block mb-2">Total
+                      Order</span>
+                    <span class="h3 font-bold mb-0">{{total_order}}</span>
+                  </div>
+                  <div class="col-auto">
+                    <!-- <div
+                      class="icon icon-shape bg-primary text-white text-lg rounded-circle">
+                      <i class="bi bi-people"></i>
+                    </div> -->
+                  </div>
+                </div>
+                <div class="row mt-2">
+                  <div class="col">
+                    <div class=" mb-0 text-sm">
+                      <span
+                        class="badge badge-pill bg-soft-success text-success me-2">
+                        <i class="bi bi-arrow-up me-1"></i>13%
+                      </span>
+                      <span class="text-nowrap text-xs text-muted">Total </span>
+                    </div>
+                  </div>
+                  <div class="col-auto">
+                    <div
+                      class="icon icon-shape text-white text-lg rounded-circle">
+                      <a href="/order/"><i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                 </div>
@@ -296,8 +340,8 @@
                   <div class="col">
                     <span
                       class="h6 font-semibold text-muted text-sm d-block mb-2">Last Month
-                      Sold</span>
-                    <span class="h3 font-bold mb-0">750.90 BDT</span>
+                      Order</span>
+                    <span class="h3 font-bold mb-0">{{last_month_total_order}}</span>
                   </div>
                   <div class="col-auto">
                     <!-- <div
@@ -319,49 +363,7 @@
                   <div class="col-auto">
                     <div
                       class="icon icon-shape text-white text-lg rounded-circle">
-                      <a href><i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single box end-->
-
-
-
-          <!-- single box start-->
-          <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card shadow border-0 hover-card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <span
-                      class="h6 font-semibold text-muted text-sm d-block mb-2">Last
-                      Month Profit</span>
-                    <span class="h3 font-bold mb-0">750.90  BDT</span>
-                  </div>
-                  <div class="col-auto">
-                    <!-- <div
-                      class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                      <i class="bi bi-people"></i>
-                    </div> -->
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <div class="col">
-                    <div class=" mb-0 text-sm">
-                      <span
-                        class="badge badge-pill bg-soft-success text-success me-2">
-                        <i class="bi bi-arrow-up me-1"></i>13%
-                      </span>
-                      <span class="text-nowrap text-xs text-muted">Total </span>
-                    </div>
-                  </div>
-                  <div class="col-auto">
-                    <div
-                      class="icon icon-shape text-white text-lg rounded-circle">
-                      <a href><i class="fa fa-arrow-circle-right"></i></a>
+                      <a href="/order/"><i class="fa fa-arrow-circle-right"></i></a>
                     </div>
                   </div>
                 </div>
@@ -374,88 +376,7 @@
         <!-- Box Row End -->
 
 
-        <div class="row g-6 mb-6 mb-4">
-
-          <!-- single box start-->
-          <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card shadow border-0 hover-card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <span
-                      class="h6 font-semibold text-muted text-sm d-block mb-2">Total Item Sold
-                      </span>
-                    <span class="h3 font-bold mb-0">750.90  BDT</span>
-                  </div>
-                  <div class="col-auto">
-                    <!-- <div
-                      class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                      <i class="bi bi-people"></i>
-                    </div> -->
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <div class="col">
-                    <div class=" mb-0 text-sm">
-                      <span
-                        class="badge badge-pill bg-soft-success text-success me-2">
-                        <i class="bi bi-arrow-up me-1"></i>13%
-                      </span>
-                      <span class="text-nowrap text-xs text-muted">Total </span>
-                    </div>
-                  </div>
-                  <div class="col-auto">
-                    <div
-                      class="icon icon-shape text-white text-lg rounded-circle">
-                      <a href><i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single box end-->
-
-          <!-- single box start-->
-          <div class="col-xl-3 col-sm-6 col-12">
-            <div class="card shadow border-0 hover-card">
-              <div class="card-body">
-                <div class="row">
-                  <div class="col">
-                    <span
-                      class="h6 font-semibold text-muted text-sm d-block mb-2">Last Month Item Sold
-                      </span>
-                    <span class="h3 font-bold mb-0">750.90  BDT</span>
-                  </div>
-                  <div class="col-auto">
-                    <!-- <div
-                      class="icon icon-shape bg-primary text-white text-lg rounded-circle">
-                      <i class="bi bi-people"></i>
-                    </div> -->
-                  </div>
-                </div>
-                <div class="row mt-2">
-                  <div class="col">
-                    <div class=" mb-0 text-sm">
-                      <span
-                        class="badge badge-pill bg-soft-success text-success me-2">
-                        <i class="bi bi-arrow-up me-1"></i>13%
-                      </span>
-                      <span class="text-nowrap text-xs text-muted">Total </span>
-                    </div>
-                  </div>
-                  <div class="col-auto">
-                    <div
-                      class="icon icon-shape text-white text-lg rounded-circle">
-                      <a href><i class="fa fa-arrow-circle-right"></i></a>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <!-- single box end-->
-        </div>
+        
 
 
       </div>
@@ -484,7 +405,7 @@
         </thead>
         <tbody>
           <tr>
-            <td>Tiger Nixon</td>
+            <td>Formal223</td>
             <td>105</td>
             <td>Shirt</td>
             <td>200</td>

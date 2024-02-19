@@ -80,9 +80,17 @@
                 {% for customer in customers %}
                 <option value='{{customer.id}}'>{{customer.name}}</option>
                 {% endfor %}
+
+                
+
+
                     
                 
             </select>
+        </div>
+        <div class="col">
+            Pay Amount:
+            <input style="padding: 5px; width: 100px; margin-right: 15px;" type="text" name="pay_amount" id="" >
         </div>
         <div class="col me-3 d-flex justify-content-end">
             <input class="btn btn-secondary px-4" type="submit" value="Make Order">
